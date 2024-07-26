@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	tmprcli "go.temporal.io/sdk/client"
@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	tprCli, err := tmprcli.Dial(tmprcli.Options{
 		HostPort: "localhost:",
 	})
