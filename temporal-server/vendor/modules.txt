@@ -87,6 +87,7 @@ go.temporal.io/api/workflowservice/v1
 go.temporal.io/api/workflowservicemock/v1
 # go.temporal.io/sdk v1.28.1
 ## explicit; go 1.21
+go.temporal.io/sdk/activity
 go.temporal.io/sdk/client
 go.temporal.io/sdk/converter
 go.temporal.io/sdk/internal
@@ -99,6 +100,9 @@ go.temporal.io/sdk/internal/common/util
 go.temporal.io/sdk/internal/log
 go.temporal.io/sdk/internal/protocol
 go.temporal.io/sdk/log
+go.temporal.io/sdk/temporal
+go.temporal.io/sdk/worker
+go.temporal.io/sdk/workflow
 # golang.org/x/exp v0.0.0-20231127185646-65229373498e
 ## explicit; go 1.20
 golang.org/x/exp/constraints

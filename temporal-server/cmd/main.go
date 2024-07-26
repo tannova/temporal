@@ -2,6 +2,7 @@ package cmd
 
 import (
 	tmprcli "go.temporal.io/sdk/client"
+	"temporal-server/workflow"
 )
 
 func main() {
@@ -13,4 +14,5 @@ func main() {
 		return
 	}
 
+	workflow.NewWorkflow(tprCli)
 }
