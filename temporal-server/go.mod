@@ -1,6 +1,6 @@
 module temporal-server
 
-go 1.22.1
+go 1.21.1
 
 require go.temporal.io/sdk v1.28.1
 
