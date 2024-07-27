@@ -29,7 +29,7 @@ func main() {
 		we, err := tprCli.ExecuteWorkflow(r.Context(), tmprcli.StartWorkflowOptions{
 			ID:        "weather_workflow",
 			TaskQueue: "weather",
-		}, "GetWeatherWorkflow", cityName)
+		}, "weather-workflow", cityName)
 		if err != nil {
 			http.Error(w, "unable to start workflow", http.StatusInternalServerError)
 			return

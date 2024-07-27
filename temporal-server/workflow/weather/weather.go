@@ -2,6 +2,7 @@ package weather
 
 import (
 	"fmt"
+	"go.temporal.io/sdk/activity"
 	"time"
 
 	tmprcli "go.temporal.io/sdk/client"
@@ -23,8 +24,12 @@ func New(tprCli tmprcli.Client) *Weather {
 
 func (w Weather) RegisterWF() {
 	workerCM := worker.New(w.tprCli, "weather", worker.Options{})
-	workerCM.RegisterWorkflow(w.GetWeatherWorkflow)
-	workerCM.RegisterActivity(GetWeatherActivity)
+	workerCM.RegisterWorkflowWithOptions(w.GetWeatherWorkflow, workflow.RegisterOptions{
+		Name: "weather-workflow",
+	})
+	workerCM.RegisterActivityWithOptions(GetWeatherActivity, activity.RegisterOptions{
+		Name: "weather-activity",
+	})
 	// Start Temporal
 	go func() {
 		err := workerCM.Run(worker.InterruptCh())
@@ -47,7 +52,7 @@ func (w Weather) GetWeatherWorkflow(ctx workflow.Context, city string) ([]model.
 	ctx = workflow.WithActivityOptions(ctx, options)
 	var current model.WeatherData
 	// start the activities
-	err := workflow.ExecuteActivity(ctx, GetWeatherActivity, city).Get(ctx, &current)
+	err := workflow.ExecuteActivity(ctx, "weather-activity", city).Get(ctx, &current)
 	// wait for activities to complete
 	if err != nil {
 		fmt.Println(err)
