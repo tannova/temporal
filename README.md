@@ -17,7 +17,7 @@ There are two ways to call the API:
 
 
 ## Temporal - Server
-**This is service handle logic register workflow & acitviy and implement logic**
+**This is service register workflow & acitviy and implement logic**
 
 `After run temporal , using cmd : go run cmd/main.go
 `
