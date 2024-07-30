@@ -31,12 +31,10 @@ func (w Weather) RegisterWF() {
 		Name: "weather-activity",
 	})
 	// Start Temporal
-	go func() {
-		err := workerCM.Run(worker.InterruptCh())
-		if err != nil {
-			fmt.Println("error running temporal worker: ", err)
-		}
-	}()
+	err := workerCM.Start()
+	if err != nil {
+		fmt.Println("error running temporal worker: ", err)
+	}
 }
 
 func (w Weather) GetWeatherWorkflow(ctx workflow.Context, city string) ([]model.WeatherData, error) {
