@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/google/uuid"
 	"net/http"
 
 	tmprcli "go.temporal.io/sdk/client"
@@ -25,9 +26,10 @@ func main() {
 			http.Error(w, "city name is required", http.StatusBadRequest)
 			return
 		}
+		workflowID := "weather_workflow" + uuid.NewString()
 
 		we, err := tprCli.ExecuteWorkflow(r.Context(), tmprcli.StartWorkflowOptions{
-			ID:        "weather_workflow",
+			ID:        workflowID,
 			TaskQueue: "weather",
 		}, "weather-workflow", cityName)
 		if err != nil {
